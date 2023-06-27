@@ -65,8 +65,8 @@ if sys.argv[-1] == 'publish':
 
 
 install_requires = [
-    'Django>=1.11,<2.2',
-    'wagtail>=2.2',
+    'Django>=3.2',
+    'wagtail>=4.1',
 ]
 
 # Testing dependencies
@@ -109,15 +109,14 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Natural Language :: English',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Framework :: Django',
-        'Framework :: Django :: 1.11',
-        'Framework :: Django :: 2.0',
-        'Framework :: Django :: 2.1',
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Framework :: Django",
+        "Framework :: Django :: 3",
+        "Framework :: Django :: 4",
+        "Framework :: Wagtail",
+        "Framework :: Wagtail :: 4",
+        "Framework :: Wagtail :: 5",
+        "License :: OSI Approved :: BSD License",
     ]
 )
