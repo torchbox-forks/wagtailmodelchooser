@@ -1,8 +1,6 @@
 from django.conf.urls import include, url
-
+from wagtail import urls as core_urls
 from wagtail.admin import urls as admin_urls
-from wagtail.core import urls as core_urls
-
 
 urlpatterns = [
     url(r'^admin/', include(admin_urls)),

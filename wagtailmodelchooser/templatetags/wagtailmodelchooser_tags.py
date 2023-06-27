@@ -10,7 +10,7 @@ def getattr(obj, attr_name):
         return obj.__getattribute__(attr_name)
     except AttributeError:
         return obj.__dict__.get(attr_name, '')
-    except:
+    except Exception:
         return ''
 
 

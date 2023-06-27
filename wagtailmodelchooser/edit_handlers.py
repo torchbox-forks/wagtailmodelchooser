@@ -3,12 +3,11 @@ from django.conf.urls import url
 from django.db import models
 from django.urls import reverse
 from django.utils.html import format_html, format_html_join
+from wagtail import hooks
+from wagtail.admin.panels import BaseChooserPanel
 
-from wagtail.admin.edit_handlers import BaseChooserPanel
-from wagtail.core import hooks
-
-from .widgets import AdminModelChooser
 from .views import ModelChooserView, ModelChosenView
+from .widgets import AdminModelChooser
 
 
 class ModelChooserPanel(BaseChooserPanel):

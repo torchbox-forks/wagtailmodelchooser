@@ -1,7 +1,9 @@
 from django.db import models
 
+from wagtailmodelchooser.edit_handlers import (AdminModelChooser,
+                                               ModelChooserPanel,
+                                               register_chooser_for_model)
 from wagtailmodelchooser.views import ModelChooserView, ModelChosenView
-from wagtailmodelchooser.edit_handlers import AdminModelChooser, ModelChooserPanel, register_chooser_for_model
 
 
 class Event(models.Model):
@@ -46,5 +48,6 @@ class EventChooserPanel(ModelChooserPanel):
     widget_class = AdminEventChooser
     chooser_view = EventChooserView
     chosen_view = EventChosenView
+
 
 EventChooserPanel.register_with_wagtail()

@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 
-import re
 import os
-import sys
-from setuptools import find_packages, setup
+import re
 
+from setuptools import find_packages, setup
 
 name = 'wagtailmodelchooser'
 package = 'wagtailmodelchooser'
@@ -22,6 +21,7 @@ def get_version(package):
     init_py = open(os.path.join(package, '__init__.py')).read()
     return re.search("^__version__ = ['\"]([^'\"]+)['\"]",
                      init_py, re.MULTILINE).group(1)
+
 
 version = get_version(package)
 

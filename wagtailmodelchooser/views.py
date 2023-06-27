@@ -1,10 +1,9 @@
 import json
 
-from django.views.generic import DetailView, ListView
 from django.shortcuts import render
-
-from wagtail.admin.modal_workflow import render_modal_workflow
+from django.views.generic import DetailView, ListView
 from wagtail.admin.forms import SearchForm
+from wagtail.admin.modal_workflow import render_modal_workflow
 from wagtail.utils.pagination import paginate
 
 

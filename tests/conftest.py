@@ -60,7 +60,7 @@ def pytest_configure():
             'wagtail.images',
             'wagtail.search',
             'wagtail.admin',
-            'wagtail.core',
+            'wagtail',
             'wagtailmodelchooser',
             'modelcluster',
             'taggit',

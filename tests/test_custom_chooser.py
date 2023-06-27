@@ -1,10 +1,9 @@
-from random import randint
 import datetime
+from random import randint
 
-from django.urls import reverse
 from django.test import TestCase
-
-from wagtail.tests.utils import WagtailTestUtils
+from django.urls import reverse
+from wagtail.test.utils import WagtailTestUtils
 
 from . import models
 
