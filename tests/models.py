@@ -1,8 +1,10 @@
 from django.db import models
 
-from wagtailmodelchooser.edit_handlers import (AdminModelChooser,
-                                               ModelChooserPanel,
-                                               register_chooser_for_model)
+from wagtailmodelchooser.panels import (
+    AdminModelChooser,
+    ModelChooserPanel,
+    register_chooser_for_model,
+)
 from wagtailmodelchooser.views import ModelChooserView, ModelChosenView
 
 
@@ -23,27 +25,27 @@ ItemChooserPanel = register_chooser_for_model(Item)
 
 
 class EventChooserView(ModelChooserView):
-    template_name = 'wagtaileventchooser/chooser/event_chooser.html'
-    results_template_name = 'wagtaileventchooser/chooser/event_results.html'
+    template_name = "wagtaileventchooser/chooser/event_chooser.html"
+    results_template_name = "wagtaileventchooser/chooser/event_results.html"
     model = Event
-    ordering = ['-starts_on', '-ends_on']
-    title_field = 'title'
-    model_chooser_url_name = 'event_chooser'
-    model_chosen_url_name = 'event_chosen'
+    ordering = ["-starts_on", "-ends_on"]
+    title_field = "title"
+    model_chooser_url_name = "event_chooser"
+    model_chosen_url_name = "event_chosen"
 
 
 class EventChosenView(ModelChosenView):
     model = Event
-    title_field = 'title'
+    title_field = "title"
 
 
 class AdminEventChooser(AdminModelChooser):
     model = Event
-    title_field = 'title'
+    title_field = "title"
 
 
 class EventChooserPanel(ModelChooserPanel):
-    object_type_name = 'event'
+    object_type_name = "event"
     model = Event
     widget_class = AdminEventChooser
     chooser_view = EventChooserView

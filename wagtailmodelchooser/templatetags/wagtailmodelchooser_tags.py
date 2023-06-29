@@ -9,9 +9,9 @@ def getattr(obj, attr_name):
         assert obj is not None
         return obj.__getattribute__(attr_name)
     except AttributeError:
-        return obj.__dict__.get(attr_name, '')
+        return obj.__dict__.get(attr_name, "")
     except Exception:
-        return ''
+        return ""
 
 
 # TODO:
@@ -19,13 +19,14 @@ def getattr(obj, attr_name):
 # (should use blocktrans.asvar instead)
 # From: https://www.djangosnippets.org/snippets/545/
 
-@register.tag(name='captureas')
+
+@register.tag(name="captureas")
 def do_captureas(parser, token):
     try:
         tag_name, args = token.contents.split(None, 1)
     except ValueError:
         raise template.TemplateSyntaxError("'captureas' node requires a variable name.")
-    nodelist = parser.parse(('endcaptureas',))
+    nodelist = parser.parse(("endcaptureas",))
     parser.delete_first_token()
     return CaptureasNode(nodelist, args)
 
@@ -38,4 +39,4 @@ class CaptureasNode(template.Node):
     def render(self, context):
         output = self.nodelist.render(context)
         context[self.varname] = output
-        return ''
+        return ""

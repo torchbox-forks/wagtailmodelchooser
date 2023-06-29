@@ -13,15 +13,19 @@ class TestEventChooserView(TestCase, WagtailTestUtils):
         self.login()
 
     def test_simple(self):
-        response = self.client.get(reverse('event_chooser'))
+        response = self.client.get(reverse("event_chooser"))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'wagtaileventchooser/chooser/event_chooser.html')
-        self.assertTemplateUsed(response, 'wagtailmodelchooser/chooser/model_chooser.js')
+        self.assertTemplateUsed(
+            response, "wagtaileventchooser/chooser/event_chooser.html"
+        )
+        self.assertTemplateUsed(
+            response, "wagtailmodelchooser/chooser/model_chooser.js"
+        )
 
     def test_search(self):
-        response = self.client.get(reverse('event_chooser'), {'q': "Hello"})
+        response = self.client.get(reverse("event_chooser"), {"q": "Hello"})
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['query_string'], "Hello")
+        self.assertEqual(response.context["query_string"], "Hello")
 
     def make_events(self):
         startdate = datetime.datetime(2010, 1, 1)
@@ -30,20 +34,20 @@ class TestEventChooserView(TestCase, WagtailTestUtils):
             models.Event.objects.create(
                 title="Test {}".format(i),
                 starts_on=starts_on,
-                ends_on=starts_on + datetime.timedelta(1, 14)
+                ends_on=starts_on + datetime.timedelta(1, 14),
             )
 
     def test_pagination(self):
         self.make_events()
 
-        response = self.client.get(reverse('event_chooser'), {'p': 2})
+        response = self.client.get(reverse("event_chooser"), {"p": 2})
 
         # Check response
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'wagtaileventchooser/events/list.html')
+        self.assertTemplateUsed(response, "wagtaileventchooser/events/list.html")
 
         # Check that we got the correct page
-        self.assertEqual(response.context['object_list'].number, 2)
+        self.assertEqual(response.context["object_list"].number, 2)
 
         # Check that custom columns are present
         self.assertContains(response, "<th>Starts on</th>")
@@ -52,26 +56,29 @@ class TestEventChooserView(TestCase, WagtailTestUtils):
     def test_pagination_invalid(self):
         self.make_events()
 
-        response = self.client.get(reverse('event_chooser'), {'p': 'Hello World!'})
+        response = self.client.get(reverse("event_chooser"), {"p": "Hello World!"})
 
         # Check response
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'wagtaileventchooser/events/list.html')
+        self.assertTemplateUsed(response, "wagtaileventchooser/events/list.html")
 
         # Check that we got page one
-        self.assertEqual(response.context['object_list'].number, 1)
+        self.assertEqual(response.context["object_list"].number, 1)
 
     def test_pagination_out_of_range(self):
         self.make_events()
 
-        response = self.client.get(reverse('event_chooser'), {'p': 99999})
+        response = self.client.get(reverse("event_chooser"), {"p": 99999})
 
         # Check response
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'wagtaileventchooser/events/list.html')
+        self.assertTemplateUsed(response, "wagtaileventchooser/events/list.html")
 
         # Check that we got the last page
-        self.assertEqual(response.context['object_list'].number, response.context['object_list'].paginator.num_pages)
+        self.assertEqual(
+            response.context["object_list"].number,
+            response.context["object_list"].paginator.num_pages,
+        )
 
 
 class TestEventChooserChosenView(TestCase, WagtailTestUtils):
@@ -80,10 +87,13 @@ class TestEventChooserChosenView(TestCase, WagtailTestUtils):
 
         # Create an event to choose
         self.event = models.Event.objects.create(
-            title="Test event", starts_on=datetime.datetime(2016, 6, 20), ends_on=datetime.datetime(2016, 6, 21))
+            title="Test event",
+            starts_on=datetime.datetime(2016, 6, 20),
+            ends_on=datetime.datetime(2016, 6, 21),
+        )
 
     def test_simple(self):
-        response = self.client.get(reverse('event_chosen', args=(self.event.id,)))
+        response = self.client.get(reverse("event_chosen", args=(self.event.id,)))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'wagtailmodelchooser/chooser/model_chosen.js')
+        self.assertTemplateUsed(response, "wagtailmodelchooser/chooser/model_chosen.js")
         self.assertContains(response, '"title": "Test event"')
